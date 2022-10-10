@@ -1,0 +1,54 @@
+<!doctype html><html lang="en">
+
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="XX-Content-Security-Policy" content=
+"default-src 'self'; script-src 'self' https://cdn.skypack.dev ; object-src 'none'; font-src 'none'; frame-src 'none'; script-src-attr 'none'"
+/>
+
+<link href="manifest.webmanifest" rel="manifest" type="application/manifest+json"/>
+<link href="style/app.css" rel="stylesheet"/>
+<link href="style/icon.svg" rel="icon"/>
+
+<title>Nick’s Notes App</title>
+
+<h1>Nick&rsquo;s Notes App</h1>
+
+<form id="bookmark-form" method="POST">
+  <p class="status" role="alert" data-state=""></p>
+  <!--
+    <p class="status" role="alert" data-state="success"></p>
+    <p class="status" role="alert" data-state="error"></p>
+  -->
+  <p>
+    <label for="url">URL</label>
+    <input id="url" name="url" type="url" required/>
+  </p>
+  <p>
+    <label for="title">Title</label>
+    <input id="title" name="title" data-X-required/>
+  </p>
+  <p>
+    <label for="desc">Description</label>
+    <input id="desc" name="text"/>
+  </p>
+  <p>
+    <label for="tags">Tags</label>
+    <input id="tags" name="tags"/>
+  </p>
+  <p>
+    <label for="priv">Private</label>
+    <input id="priv" name="private" type="checkbox"/>
+  </p>
+  <p>
+    <button type="submit">Add bookmark</button>
+  </p>
+  <p>
+    <a href="./settings.html">Settings</a>
+  </p>
+</form>
+
+<script type="module" src="lib/app.mjs"></script>
+
+</html>

@@ -1,0 +1,40 @@
+<!doctype html><html lang="en">
+
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Content-Security-Policy" content=
+"default-src 'self'; script-src 'self'; object-src 'none'; font-src 'none'; frame-src 'none'; script-src-attr 'none'"
+/>
+
+<link href="style/app.css" rel="stylesheet"/>
+<link href="manifest.webmanifest" rel="manifest" type="application/manifest+json" />
+<link href="style/icon.svg" rel="icon"/>
+
+<title>App Settings</title>
+
+<h1>App Settings</h1>
+
+<form id="settings-form" method="POST">
+  <p>
+    <label for="gh">GitHub Key</label>
+    <input id="gh" name="github" required/>
+  </p>
+  <p>
+    <label for="ts">Last saved</label>
+    <input id="ts" name="time" readonly/>
+  </p>
+  <p>
+    <button type="submit">Save</button>
+  </p>
+  <p>
+    <button id="paste-button">Paste</button>
+  </p>
+  <p>
+    <a href="./">Back</a>
+  </p>
+</form>
+
+<script type="module" src="lib/SettingsForm.mjs"></script>
+
+</html>

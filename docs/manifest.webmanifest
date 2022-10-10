@@ -1,0 +1,32 @@
+{
+  "lang": "en",
+  "short_name": "Nick’s Notes",
+  "name": "Nick’s Notes App (beta)",
+  "description": "A Web & Mobile App to store bookmarks and notes ... | © Nick Freear",
+  "start_url": "./?utm_source=pwa&",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#FFFFFF",
+  "theme_color": "#004050",
+  "icons": [
+    {
+      "src": "style/icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }, {
+      "src": "style/icon.svg",
+      "sizes": "383x383",
+      "type": "image/png"
+    }
+  ],
+  "share_target": {
+    "action": "./?save-bookmark",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "url": "url",
+      "title": "title",
+      "text": "text"
+    }
+  }
+}

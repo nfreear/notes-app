@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+  width="200" height="200" viewBox="0 0 200 200"
+  >
+  <title>Nick’s Notes Web App (icon)</title>
+  <style>
+  rect {
+    fill: #fcfcfc;
+    stroke: #ddd;
+    stroke-width: 2px;
+  }
+  text {
+    fill: #004050;
+    font: bold 155px Arial;
+    letter-spacing: -26px;
+  }
+  </style>
+  <rect x="0" y="0" width="200" height="200" rx="10%"/>
+  <text x="3" y="160">N F</text>
+</svg>
