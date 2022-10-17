@@ -1,7 +1,13 @@
+Pinboard.mjs
+
+elements
+notes-app
 
 bookmarks
 node_modules
-package-lock.json
+# package-lock.json
 old*
+
+*test*
 
 # End.
