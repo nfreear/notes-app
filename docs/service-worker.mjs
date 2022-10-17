@@ -17,7 +17,8 @@ const FILES = [
   `${PATH}/BookmarkForm.mjs`,
   `${PATH}/Gist.mjs`,
   `${PATH}/SettingsForm.mjs`,
-  'https://nfreear.github.io/elements/src/components/MyIndieAuthElement.js',
+  '/elements/src/MyElement.js',
+  '/elements/src/components/MyIndieAuthElement.js',
   './settings.html',
   './style/app.css',
   './style/icon.svg'

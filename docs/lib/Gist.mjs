@@ -24,7 +24,7 @@ export default class Gist {
       }
     });
 
-    const { html_url } = RESP.data; // id.
+    const { html_url } = RESP.data; /* eslint-disable-line camelcase */ // id.
 
     console.debug('Gist created:', RESP.status, html_url, RESP);
 
