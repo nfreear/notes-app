@@ -15,7 +15,9 @@
 
 <h1>Nick&rsquo;s Notes App</h1>
 
-<form id="bookmark-form" method="POST">
+<my-indie-auth>
+
+<form id="bookmark-form" method="POST" hidden>
   <p class="status" role="alert" data-state=""></p>
   <!--
     <p class="status" role="alert" data-state="success"></p>
@@ -44,10 +46,9 @@
   <p>
     <button type="submit">Add bookmark</button>
   </p>
-  <p>
-    <a href="./settings.html">Settings</a>
-  </p>
 </form>
+
+</my-indie-auth>
 
 <script type="module" src="lib/app.mjs"></script>
 

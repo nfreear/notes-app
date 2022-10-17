@@ -4,6 +4,8 @@
  * Store and access App. settings.
  */
 
+import 'https://nfreear.github.io/elements/src/components/MyIndieAuthElement.js';
+
 const { document, localStorage, location, navigator } = window;
 const { clipboard } = navigator;
 

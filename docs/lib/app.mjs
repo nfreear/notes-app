@@ -3,6 +3,7 @@
  */
 
 import { BookmarkForm } from './BookmarkForm.mjs';
+import 'https://nfreear.github.io/elements/src/components/MyIndieAuthElement.js';
 
 const { location, navigator } = window;
 const { serviceWorker } = navigator;

@@ -33,9 +33,9 @@ export class BookmarkForm {
     try {
       const gist = new Gist(); // this.CFG.github);
       const resp = await gist.writeJson(bookmark);
-      const { html_url } = resp.data;
+      const { html_url } = resp.data; /* eslint-disable-line camelcase */
 
-      this._showSuccess(`<a href="${html_url}">Gist created</a>`, { bookmark, resp });
+      this._showSuccess(`<a href="${html_url}">Gist created</a>`, { bookmark, resp }); /* eslint-disable-line camelcase */
     } catch (ex) {
       this._showError('problem creating Gist', { ex });
     }
