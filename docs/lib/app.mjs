@@ -2,16 +2,18 @@
  * Nick’s Notes Web App | © Nick Freear, 08-Oct-2022.
  */
 
-import { BookmarkForm } from './BookmarkForm.mjs';
-import '../../elements/src/components/MyIndieAuthElement.js';
+import './MyAuthElement.mjs';
+import './BookmarkForm.mjs';
+import './SettingsForm.mjs';
+// import '../../elements/src/components/MyIndieAuthElement.js';
 
 const { location, navigator } = window;
 const { serviceWorker } = navigator;
 
-const FORM = new BookmarkForm();
+// const FORM = new BookmarkForm();
 
 if ('serviceWorker' in navigator) {
-  serviceWorker.addEventListener('message', (event) => FORM.handleMessage(event));
+  // serviceWorker.addEventListener('message', (event) => FORM.handleMessage(event));
 
   const MOCK = /mock=1/.test(location.search);
 

@@ -1,10 +1,16 @@
 /*
 */
 
-import { Octokit } from 'https://cdn.skypack.dev/@octokit/core';
+const OCTOKIT_VIA_CDN = 'https://cdn.skypack.dev/@octokit/core';
+// import { Octokit } from 'https://cdn.skypack.dev/@octokit/core';
 
 export default class Gist {
   constructor (auth) {
+    this._initialize(auth);
+  }
+
+  async _initialize (auth) {
+    const { Octokit } = await import(OCTOKIT_VIA_CDN);
     // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
     this.octokit = new Octokit({ auth });
   }
