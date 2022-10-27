@@ -2,10 +2,12 @@
   "private": true,
   "name": "@nfreear/notes-web-app",
   "scripts": {
-    "start": "cd docs && npx servor . 8080 --reload",
-    "fix": "npx semistandard --fix",
-    "test": "npx semistandard"
+    "start": "npx servor . index.html 8081 --reload",
+    "ln": "ln -s ../web-components elements",
+    "fix": "npx semistandard docs --fix",
+    "test": "npx semistandard docs"
   },
+  "semistandard": {},
   "devDependencies": {
     "semistandard": "^16.0.1",
     "servor": "^4.0.2"

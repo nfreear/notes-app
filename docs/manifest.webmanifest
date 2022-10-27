@@ -16,7 +16,7 @@
     }
   ],
   "share_target": {
-    "action": "./?act=save-bookmark&",
+    "action": "./save.html",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
     "params": {

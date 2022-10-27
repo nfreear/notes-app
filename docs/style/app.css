@@ -11,6 +11,7 @@ body {
 
 button,
 input,
+textarea,
 my-auth::part(button),
 my-auth::part(input),
 my-indie-auth::part(button),
@@ -18,7 +19,7 @@ my-indie-auth::part(input) {
   X-border: 2px solid gray;
   display: block;
   font: inherit;
-  margin: .7rem 0;
+  margin: .8rem 0;
   padding: .3rem .2rem;
   width: 98%;
 }
@@ -36,6 +37,12 @@ input:not([ type = checkbox ]) {
 input[ type = checkbox ] {
   height: 1.9rem;
   line-height: 1;
+}
+
+textarea {
+  height: 5rem;
+  min-height: 3rem;
+  min-width: 65%;
 }
 
 label {
@@ -72,9 +79,8 @@ h1 {
   content: '❌ Error: ';
 }
 
-my-indie-auth::part(input),
-my-indie-auth::part(button) {
-  margin: .8rem 0;
+[ data-state = url ] {
+  font-size: small;
 }
 
 my-indie-auth::part(a) {

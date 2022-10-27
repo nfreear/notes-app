@@ -3,6 +3,7 @@
  */
 
 import './MyAuthElement.mjs';
+import './MySaveTarget.mjs';
 import './BookmarkForm.mjs';
 import './SettingsForm.mjs';
 // import '../../elements/src/components/MyIndieAuthElement.js';

@@ -1,7 +1,7 @@
 
 [![Node.js CI][ci-img]][ci]
 
-# Nick’s Notes App
+# Nick’s Notes Web App
 
 A work-in-progress!
 

@@ -44,6 +44,7 @@ export default class BookmarkForm extends MyFormElement {
     }
 
     this._status.textContent = location.href;
+    this._status.dataset.state = 'url';
 
     return bookmark;
   }
