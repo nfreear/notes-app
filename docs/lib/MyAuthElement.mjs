@@ -8,7 +8,7 @@
 import MyElement from '../../elements/src/MyElement.js';
 import Pinboard from './Pinboard.mjs';
 
-const { crypto, sessionStorage } = window;
+const { crypto, localStorage } = window; // Was: sessionStorage.
 
 const TEMPLATE = `
 <template>
@@ -114,6 +114,10 @@ export class MyAuthElement extends MyElement {
     console.error('❌ my-auth - Error:', { error });
   }
 
+  get _storage () {
+    return localStorage;
+  }
+
   _storeAuth (httpStatus, login) {
     this._setItem('auth', JSON.stringify({
       httpStatus,
@@ -135,17 +139,17 @@ export class MyAuthElement extends MyElement {
 
   _removeItems () {
     const KEYS = ['auth'];
-    KEYS.forEach(key => sessionStorage.removeItem(`my-auth.${key}`));
+    KEYS.forEach(key => this._storage.removeItem(`my-auth.${key}`));
 
     return this._setItem('logout', new Date().toISOString());
   }
 
   _setItem (key, value) {
-    return sessionStorage.setItem(`my-auth.${key}`, value);
+    return this._storage.setItem(`my-auth.${key}`, value);
   }
 
   _getItem (key) {
-    return sessionStorage.getItem(`my-auth.${key}`);
+    return this._storage.getItem(`my-auth.${key}`);
   }
 
   _checkCSP () {

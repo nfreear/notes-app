@@ -43,6 +43,8 @@ export default class BookmarkForm extends MyFormElement {
       this._formData = bookmark;
     }
 
+    this._status.textContent = location.href;
+
     return bookmark;
   }
 
