@@ -6,7 +6,8 @@ import { MyFormElement } from '../../elements/src/components/MyFormElement.js';
 import AppSettingsForm from './SettingsForm.mjs';
 import Gist from './Gist.mjs';
 
-const { serviceWorker } = window.navigator;
+const { location, navigator } = window;
+const { serviceWorker } = navigator;
 // const NAMES = ['url', 'title', 'text'];
 
 export default class BookmarkForm extends MyFormElement {
@@ -15,33 +16,35 @@ export default class BookmarkForm extends MyFormElement {
   }
 
   async connectedCallback () {
-    this._CFG = await AppSettingsForm.retrieveData();
+    this._CFG = await AppSettingsForm._retrieveData();
     // AppSettingsForm.retrieveData().then(settings => { this.CFG = settings; });
 
     this._onsubmit = (ev) => this._handleSubmit(ev);
 
     serviceWorker.addEventListener('message', (ev) => this._handleMessage(ev));
 
-    console.debug('BookmarkForm.connected:', this);
+    console.debug('BookmarkForm.connected:', this, this._handleUrl());
   }
 
   get _status () {
     return this.querySelector('.status');
   }
 
-  /* constructor (selector = '#bookmark-form') {
-    this.form = document.querySelector(selector);
-    this.elems = this.form.elements;
-    this.status = this.form.querySelector('.status');
+  _handleUrl () {
+    const params = new URL(location.href).searchParams;
+    const saveBookmark = params.get('act') === 'save-bookmark';
+    const bookmark = {
+      url: params.get('url') || null,
+      title: params.get('title') || '',
+      text: params.get('text') || ''
+    };
 
-    // const settings = new Settings();
-    // this.CFG = settings.data;
-    SettingsForm.retrieveData().then(settings => { this.CFG = settings; });
+    if (saveBookmark && bookmark.url) {
+      this._formData = bookmark;
+    }
 
-    this.form.addEventListener('submit', ev => this._handleSubmit(ev));
-
-    console.debug('Bookmark.ctor', this);
-  } */
+    return bookmark;
+  }
 
   async _handleSubmit (event) {
     // event.preventDefault();
@@ -52,7 +55,7 @@ export default class BookmarkForm extends MyFormElement {
     // bookmark.time = new Date().toISOString();
 
     try {
-      const gist = new Gist(); // this._CFG.github);
+      const gist = new Gist(this._CFG.github);
       const resp = await gist.writeJson(bookmark);
       const { html_url } = resp.data; /* eslint-disable-line camelcase */
 
@@ -76,17 +79,16 @@ export default class BookmarkForm extends MyFormElement {
   // Data from form.
   get _formData () {
     const bookmark = super._formData;
-    // NAMES.forEach(name => { bookmark[name] = this.elems[name].value; });
 
-    bookmark.private = this.elems.private.checked;
+    bookmark.private = this.elements.private.checked;
     bookmark.time = new Date().toISOString();
     return bookmark;
   }
 
-  /* // Data to form.
+  // Data to form.
   set _formData (bookmark) {
-    NAMES.forEach(name => { this.elems[name].value = bookmark[name]; });
-  } */
+    super._formData = bookmark;
+  }
 
   _showSuccess (message, data) {
     const { resp } = data;

@@ -6,7 +6,8 @@ const OCTOKIT_VIA_CDN = 'https://cdn.skypack.dev/@octokit/core';
 
 export default class Gist {
   constructor (auth) {
-    this._initialize(auth);
+    this._auth = auth;
+    // this._initialize(auth);
   }
 
   async _initialize (auth) {
@@ -16,6 +17,7 @@ export default class Gist {
   }
 
   async writeJson (data) {
+    await this._initialize(this._auth);
     const DATE = data.time.replace(/[:.]/g, '-');
     const FILE_NAME = `bookmark-${DATE}.test.json`;
 

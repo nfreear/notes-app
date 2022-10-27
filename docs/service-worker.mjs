@@ -16,15 +16,19 @@ const FILES = [
   `${PATH}/app.mjs`,
   `${PATH}/BookmarkForm.mjs`,
   `${PATH}/Gist.mjs`,
+  `${PATH}/MyAuthElement.mjs`,
+  `${PATH}/Pinboard.mjs`,
   `${PATH}/SettingsForm.mjs`,
   '/elements/src/MyElement.js',
-  '/elements/src/components/MyIndieAuthElement.js',
+  '/elements/src/components/MyFormElement.js',
+  // '/elements/src/components/MyIndieAuthElement.js',
+  './index.html',
   './settings.html',
   './style/app.css',
   './style/icon.svg'
 ];
 
-console.warn('Worker: location', PATH, location);
+console.debug('Worker: location', PATH, location);
 
 self.addEventListener('install', (event) => {
   console.warn('Worker.install:', CACHE_NAME, event);
@@ -39,10 +43,14 @@ self.addEventListener('fetch', (event) => {
   const MOCK = /mock=1/.test(location.href);
   const mockGet = MOCK && event.request.method === 'GET';
 
-  console.debug('Worker.fetch:', MOCK, url, event);
+  const IS_SAVE_BOOKMARK = /\?save-bookmark/.test(url);
+  const IS_GET = event.request.method === 'GET';
+  const parts = IS_GET ? new URL(url) : 'p';
+
+  console.debug('Worker.fetch:', MOCK, url, parts, event);
 
   // Regular requests not related to Web Share Target.
-  if (event.request.method !== 'POST' && !MOCK) {
+  if (!IS_SAVE_BOOKMARK && !MOCK) { // event.request.method !== 'POST'
     event.respondWith(fetch(event.request));
     return;
   }
@@ -55,7 +63,7 @@ self.addEventListener('fetch', (event) => {
   // Requests related to Web Share Target.
   event.respondWith(
     (async () => {
-      const formData = mockGet ? mockData() : await event.request.formData();
+      const formData = parts ? parts.searchParams : mockGet ? mockData() : await event.request.formData();
       const bookmark = {
         url: formData.get('url') || '',
         title: formData.get('title') || '',
@@ -66,9 +74,9 @@ self.addEventListener('fetch', (event) => {
       // Instead of the original URL `/save-bookmark/`, redirect
       // the user to a URL returned by the `saveBookmark()`
       // function, for example, `/`.
-      const RES = await postMessage(event, { bookmark });
+      await postMessage(event, { bookmark });
 
-      console.debug('Worker.save target:', bookmark, RES);
+      console.warn('>> Worker.save target:', bookmark);
       // return Response.redirect(responseUrl, 303);
 
       return fetch(event.request);

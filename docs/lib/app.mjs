@@ -10,8 +10,6 @@ import './SettingsForm.mjs';
 const { location, navigator } = window;
 const { serviceWorker } = navigator;
 
-// const FORM = new BookmarkForm();
-
 if ('serviceWorker' in navigator) {
   // serviceWorker.addEventListener('message', (event) => FORM.handleMessage(event));
 
