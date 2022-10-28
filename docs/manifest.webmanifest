@@ -3,7 +3,7 @@
   "short_name": "Nick’s Notes",
   "name": "Nick’s Notes App (beta)",
   "description": "A Web & Mobile App to store bookmarks and notes ... | © Nick Freear",
-  "start_url": "./?utm_source=pwa&",
+  "start_url": "./?pwa=1",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#FFFFFF",
