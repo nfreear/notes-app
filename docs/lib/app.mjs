@@ -6,6 +6,7 @@ import './MyAuthElement.mjs';
 import './MySaveTarget.mjs';
 import './BookmarkForm.mjs';
 import './SettingsForm.mjs';
+import '../../elements/src/components/MyBookmarkletElement.js';
 // import '../../elements/src/components/MyIndieAuthElement.js';
 
 const { location, navigator } = window;

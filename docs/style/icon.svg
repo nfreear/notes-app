@@ -2,17 +2,22 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
   width="192" height="192" viewBox="0 0 192 192"
   >
-  <title>Nick’s Notes Web App (icon)</title>
+  <title>Nick’s Notes</title>
   <style>
+  /* @import url(https://fonts.googleapis.com/css?family=Architects+Daughter:400,700);*/
+  @import url(https://fonts.googleapis.com/css2?family=Nunito:wght@700&amp;display=swap&amp;text=NF);
+
   rect {
-    fill: #fcfcfc;
+    fill: #fbfbfb;
     rx: 20%;
     stroke: #ddd;
-    stroke-width: 2px;
+    stroke-width: 1px;
   }
   text {
     fill: #004050;
-    font: bold 110px 'Comic Sans MS';
+    /* font: bold 110px 'Comic Sans MS'; */
+    font: bold 120px Nunito,Arial,sans-serif;
+    letter-spacing: -5px;
     dominant-baseline: central;
     text-anchor: middle;
   }

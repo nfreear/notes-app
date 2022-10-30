@@ -16,14 +16,14 @@ export default class Gist {
     this.octokit = new Octokit({ auth });
   }
 
-  async writeJson (data) {
+  async writeJson (data, isPrivate = true) {
     await this._initialize(this._auth);
     const DATE = data.time.replace(/[:.]/g, '-');
     const FILE_NAME = `bookmark-${DATE}.test.json`;
 
     const RESP = await this.octokit.request('POST /gists', {
-      description: FILE_NAME, // 'Example of a gist',
-      public: false,
+      description: FILE_NAME,
+      public: !isPrivate,
       files: {
         'my-bookmark.test.json': {
         // `${FILE_NAME}`: {

@@ -29,13 +29,15 @@ export default class Pinboard {
   }
 
   _v1Request (path, params) {
-    const uri = `${this.corsProxy}${V1_API}${path}?${this._params(params)}`;
-    return new Request(uri, {
+    const { corsProxy, useProxy } = this;
+    const uri = `${V1_API}${path}?${this._params(params)}`;
+    // const uri = `${this.corsProxy}?${V1_API}${path}?${this._params(params)}`;
+    return new Request(useProxy ? corsProxy + encodeURIComponent(uri) : uri, {
       // method: 'POST',
-      mode: this.useProxy ? 'cors' : 'no-cors',
+      mode: useProxy ? 'cors' : 'no-cors',
       headers: {
         Accept: 'application/json',
-        'User-Agent': this.appId,
+        // 'User-Agent': this.appId,
         'X-App-ID': this.appId
       }
     });
@@ -85,11 +87,22 @@ export default class Pinboard {
   /** v1 API - Post a bookmark.
   */
   async postBookmark (bookmark = {}) {
-    const req = this._v1Request('posts/add', bookmark);
+    const req = this._v1Request('posts/add', this._toDelicious(bookmark));
     const resp = await fetch(req);
     const data = resp.ok ? (this.useProxy ? await resp.json() : await resp.text()) : null;
 
     return { data, resp, req };
+  }
+
+  _toDelicious (bookmark) {
+    const { url, title, text, tags } = bookmark;
+    return {
+      url,
+      description: title,
+      extended: text,
+      tags: tags.join(','),
+      shared: bookmark.private ? 'no' : 'yes'
+    };
   }
 
   _params (bookmarkEtc = {}) {

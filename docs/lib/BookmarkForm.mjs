@@ -5,6 +5,7 @@
 import { MyFormElement } from '../../elements/src/components/MyFormElement.js';
 import AppSettingsForm from './SettingsForm.mjs';
 import Gist from './Gist.mjs';
+import Pinboard from './Pinboard.mjs';
 
 const { location, navigator } = window;
 const { serviceWorker } = navigator;
@@ -50,29 +51,45 @@ export default class BookmarkForm extends MyFormElement {
   }
 
   async _handleSubmit (event) {
-    // event.preventDefault();
+    this.dataset.working = true;
 
     // Data from form.
     const bookmark = this._formData;
+
+    bookmark.tags = bookmark.tags.split(/[, ]+/);
 
     // bookmark.time = new Date().toISOString();
 
     try {
       const gist = new Gist(this._CFG.github);
-      const resp = await gist.writeJson(bookmark);
+      const resp = await gist.writeJson(bookmark, bookmark.private);
       const { html_url } = resp.data; /* eslint-disable-line camelcase */
 
       this._showSuccess(`<a href="${html_url}">Gist created</a>`, { bookmark, resp }); /* eslint-disable-line camelcase */
     } catch (ex) {
       this._showError('problem creating Gist', { ex });
     }
-    console.debug('BookmarkForm.submit:', bookmark, this.elems, event);
+
+    this._pause();
+
+    try {
+      const PB = new Pinboard(this._CFG.pinboard);
+      const respPB = await PB.postBookmark(bookmark);
+
+      this._showSuccess('Bookmark created in Pinboard', { resp: respPB });
+    } catch (ex) {
+      this._showError('problem creating Pinboard BM', { ex });
+    }
+
+    console.debug('BookmarkForm.submit:', bookmark, this.elements, event);
+
+    this.dataset.working = false;
   }
 
   _handleMessage (event) {
     const { bookmark } = event.data;
 
-    console.debug('BookmarkForm: message from SW:', bookmark, this.elems, event.data);
+    console.debug('BookmarkForm: message from SW:', bookmark, event.data);
 
     if (bookmark) {
       this._formData = bookmark;
@@ -105,6 +122,10 @@ export default class BookmarkForm extends MyFormElement {
     console.error(`Bookmark error (${ex.status}): '${message}'`, error);
     this._status.textContent = `${message} (${ex.status})`;
     this._status.dataset.state = 'error';
+  }
+
+  async _pause (delayMS = 1000) {
+    return new Promise(resolve => setTimeout(() => resolve(), delayMS));
   }
 }
 
