@@ -21,6 +21,8 @@ const FILES = [
   `${PATH}/Pinboard.mjs`,
   `${PATH}/SettingsForm.mjs`,
   '/elements/src/MyElement.js',
+  '/elements/src/BookmarkletScript.js',
+  '/elements/src/components/MyBookmarkletElement.js',
   '/elements/src/components/MyFormElement.js',
   // '/elements/src/components/MyIndieAuthElement.js',
   './index.html',

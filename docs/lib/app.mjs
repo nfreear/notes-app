@@ -1,5 +1,8 @@
 /**
- * Nick’s Notes Web App | © Nick Freear, 08-Oct-2022.
+ * Nick’s Notes Web App.
+ *
+ * @see https://github.com/nfreear/notes-app
+ * @copyright © Nick Freear, 08-Oct-2022.
  */
 
 import './MyAuthElement.mjs';
@@ -8,6 +11,8 @@ import './BookmarkForm.mjs';
 import './SettingsForm.mjs';
 import '../../elements/src/components/MyBookmarkletElement.js';
 // import '../../elements/src/components/MyIndieAuthElement.js';
+
+// document.body.addEventListener('click', ev => console.debug('>> Click:', ev.target, ev.target.nodeName, ev));
 
 const { location, navigator } = window;
 const { serviceWorker } = navigator;

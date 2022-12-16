@@ -1,8 +1,11 @@
 {
   "private": true,
   "name": "@nfreear/notes-web-app",
+  "description": "A work-in-progress | © 2022 Nick Freear.",
+  "repository": "https://github.com/nfreear/notes-app.git",
   "scripts": {
     "start": "npx servor . index.html 8081 --reload",
+    "hash:js": "openssl dgst -sha384 -binary docs/lib/app.mjs | openssl base64 -A && echo '\n'",
     "ln": "ln -s ../web-components elements",
     "fix": "npx semistandard docs --fix",
     "test": "npx semistandard docs"

@@ -7,9 +7,10 @@ import AppSettingsForm from './SettingsForm.mjs';
 import Gist from './Gist.mjs';
 import Pinboard from './Pinboard.mjs';
 
-const { location, navigator } = window;
+const { location, navigator, FormData } = window;
 const { serviceWorker } = navigator;
 // const NAMES = ['url', 'title', 'text'];
+const DELAY_MS = 500; // Was: 1000;
 
 export default class BookmarkForm extends MyFormElement {
   static getTag () {
@@ -56,7 +57,7 @@ export default class BookmarkForm extends MyFormElement {
     // Data from form.
     const bookmark = this._formData;
 
-    bookmark.tags = bookmark.tags.split(/[, ]+/);
+    bookmark.tags = this._trimSplitTags(bookmark.tags);
 
     // bookmark.time = new Date().toISOString();
 
@@ -96,6 +97,17 @@ export default class BookmarkForm extends MyFormElement {
     }
   }
 
+  _getFormDataAlt (formEl = null) {
+    const formData = new FormData(formEl || this);
+    const data = {};
+
+    for (const KV of formData.entries()) {
+      // console.log(`${pair[0]}, ${pair[1]}`);
+      data[KV[0]] = KV[1];
+    }
+    return { data, formData };
+  }
+
   // Data from form.
   get _formData () {
     const bookmark = super._formData;
@@ -124,8 +136,16 @@ export default class BookmarkForm extends MyFormElement {
     this._status.dataset.state = 'error';
   }
 
-  async _pause (delayMS = 1000) {
+  async _pause (delayMS = DELAY_MS) {
     return new Promise(resolve => setTimeout(() => resolve(), delayMS));
+  }
+
+  /** Trim whitespace and commas, then split.
+   * @return array Array of tags.
+   */
+  _trimSplitTags (tagStr) {
+    const tagsArray = tagStr.replace(/^\s+|[\s,]+$/g, '').split(/[, ]+/);
+    return tagsArray;
   }
 }
 
